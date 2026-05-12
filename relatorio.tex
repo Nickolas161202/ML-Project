@@ -100,7 +100,7 @@ Os seis atributos preditores são todos categóricos, possuem ordem natural e ba
 \midrule
 \code{buying}   & preço de compra      & low, med, high, vhigh   & 4 \\
 \code{maint}    & custo de manutenção  & low, med, high, vhigh   & 4 \\
-\code{doors}    & número de portas     & 2, 3, 4, 5more          & 4 \\
+\code{doors}    &   de portas     & 2, 3, 4, 5more          & 4 \\
 \code{persons}  & capacidade           & 2, 4, more              & 3 \\
 \code{lug\_boot} & porta-malas          & small, med, big         & 3 \\
 \code{safety}   & segurança estimada   & low, med, high          & 3 \\
@@ -196,7 +196,7 @@ Para reforçar visualmente os padrões discutidos, a Figura~\ref{fig:heatmap} ap
 
 % =====================================================================
 \section{Conclusões da análise exploratória}
-
+\label{sec:conclusoes_EDA}
 A análise permitiu uma caracterização completa do conjunto e fornece direcionamento concreto para a próxima etapa do trabalho.
 
 \paragraph{Características do conjunto.}
@@ -228,7 +228,95 @@ A EDA aponta as seguintes ações como pertinentes para a fase posterior do trab
 \item tratamento do desbalanceamento (no mínimo, estratificação na validação cruzada);
 \item avaliar manter ou descartar \code{doors}, dado que as distribuições de classe são praticamente idênticas em todos os seus quatro níveis.
 \end{itemize}
+\section{Treinamento do modelo}
+\noindent
+\subsection{Algoritmos e Métricas de desempenho}
+\begin{minipage}[t]{0.45\textwidth}
+\textbf{Algoritmos utilizados:}
+\begin{itemize}
+    \item K-nearest neighbors
+    \item Regressão Logística
+    \item Árvore de decisão
+    \item Rede Neural
+    \item Naive Bayes
+    \item SVM
+    \item Florestas Aleatórias
+    \item AdaBoost
+\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\textbf{Métricas utilizadas}
+\begin{itemize}
+    \item Acurácia
+    \item Acurácia balanceada
+    \item Recall
+    \item Precisão
+    \item F1-Micro
+    \item F1-Macro
+    \item ROC-AUC
+\end{itemize}
+\end{minipage}
+\subsection{Scores obtidos para cada algoritmo}
+\begin{figure}[H]
+    \centering
+\includegraphics[width=\textwidth]{figures/05_score_tables.png}
+    \caption{Score de cada algoritmo nas métricas utilizadas}
+    \label{fig:placeholder}
+\end{figure}
+\subsection{Boxplot de cada métrica}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/boxplots/06-boxplot_acc.png}
+    \caption{Boxplot da acurácia}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/boxplots/07-boxplot_balanced_acc.png}
+    \caption{Boxplot da acurácia balanceada}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/boxplots/08-boxplot_f1_macro.png}
+    \caption{Boxplot do F1-Macro}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/boxplots/09-boxplot_f1_micro.png}
+    \caption{Boxplot do F1-Micro}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/boxplots/10-boxplot_precision.png}
+    \caption{Boxplot da precisão}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/boxplots/11-boxplot_recall.png}
+    \caption{Boxplot do recall}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/boxplots/12-boxplot_roc_aux.png}
+    \caption{Boxplot do ROC-AUC}
+\end{figure}
+
+\subsection{Matriz de confusão dos algoritmos analisados}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/13_confusion_matrixes.pdf}
+    \caption{Matriz de confusão para cada algoritmo avaliado}
+    \label{fig:placeholder}
+\end{figure}
+\subsection{Conclusões sobre os algoritmos avaliados}
+Considerando as métricas analisadas, o algoritmo que apresentou melhor desempenho foi o algoritmo de Florestas Aleatórias, com o F1-macro tendo um score de 0.9232 e uma acurácia balanceada de 0.9173. Devemos considerar essas duas métricas com mais rigor devido à natureza dos dados serem desbalanceadas, como visto na seção ~\ref{sec:conclusoes_EDA}. Entretanto, é interessante observar o comportamento coerente entre as métricas utilizadas e a natureza dos dados, onde todas as métricas utilizadas para dados balanceados se mostram elevadas de forma otimista. Também podemos observar através da matriz de confusão que o modelo se adaptou muito bem para  a predição de classes positivas, tendo apenas um desempenho inferior para classificar carros como acc (acceptable).
 % =====================================================================
 \begin{thebibliography}{9}
 
